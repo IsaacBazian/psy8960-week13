@@ -35,7 +35,10 @@ dbGetQuery(conn, "SELECT city, COUNT(employee_id)
            WHERE manager_hire = 'N'
            GROUP BY city;")
 
-
+# Average and standard deviation of tenure split by performance level
+dbGetQuery(conn, "SELECT performance_group, AVG(yrs_employed), STDDEV(yrs_employed)
+           FROM datascience_8960_table
+           GROUP BY performance_group;")
 
 
 
