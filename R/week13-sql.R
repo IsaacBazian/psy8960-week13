@@ -41,10 +41,12 @@ dbGetQuery(conn, "SELECT performance_group, AVG(yrs_employed), STDDEV(yrs_employ
            GROUP BY performance_group;")
 
 # Top 3 managers by location
-dbGetQuery(conn, "SELECT employee_id, test_score, city
-           FROM datascience_8960_table
-           GROUP BY employee_id, city
-           ORDER BY city, test_score DESC;")
+dbGetQuery(conn, "WITH temp_ranked AS (
+           SELECT *, DENSE_RANK() OVER(PARTITION BY city ORDER BY test_score DESC) AS manager_rank
+           FROM datascience_8960_table)
+           SELECT employee_id, test_score, city
+           FROM temp_ranked
+           WHERE manager_rank <= 3")
 
 
 
