@@ -37,14 +37,17 @@ n_managers_unique <- length(unique(week13_tbl$employee_id))
 n_managers_unique
 
 # Summary of managers by location, not hired as managers
-managers_by_location_not_hired <- week13_tbl %>% 
+managers_by_location_not_hired_tbl <- week13_tbl %>% 
   filter(manager_hire == "N") %>% 
   group_by(city) %>%
   count()
 managers_by_location_not_hired
 
-
-
+# Average and standard deviation of tenure split by performance level
+tenure_tbl <- week13_tbl %>% 
+  group_by(performance_group) %>% 
+  summarise(average_tenure = mean(yrs_employed), sd_tenure = sd(yrs_employed))
+tenure_tbl
 
 
 
