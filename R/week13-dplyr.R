@@ -41,7 +41,7 @@ managers_by_location_not_hired_tbl <- week13_tbl %>%
   filter(manager_hire == "N") %>% 
   group_by(city) %>%
   count()
-managers_by_location_not_hired
+managers_by_location_not_hired_tbl
 
 # Average and standard deviation of tenure split by performance level
 tenure_tbl <- week13_tbl %>% 
@@ -49,8 +49,13 @@ tenure_tbl <- week13_tbl %>%
   summarise(average_tenure = mean(yrs_employed), sd_tenure = sd(yrs_employed))
 tenure_tbl
 
-
-
+# Top 3 managers by location
+top_managers_tbl <- week13_tbl %>% 
+  group_by(city) %>% 
+  arrange(city, desc(test_score)) %>% 
+  select(employee_id, test_score, city) %>% 
+  slice_max(order_by = tibble(city, test_score), n = 3, with_ties = T)
+top_managers_tbl
 
 
 
