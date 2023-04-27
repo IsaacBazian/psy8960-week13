@@ -1,4 +1,4 @@
-#Script Settings and Resources
+# Script Settings and Resources
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 library(tidyverse)
 library(keyring)
@@ -6,10 +6,10 @@ library(RMariaDB)
 
 
 
-#Data Import and Cleaning
+# Data Import and Cleaning
 
-#The following code established a connection to the LATIS mySQL, gets the table of interest from the cla_tntlab database, and saves it as a csv.
-#This code is now commented out because following code simply takes the downloaded data from this project's directory.
+# The following code established a connection to the LATIS mySQL, gets the table of interest from the cla_tntlab database, and saves it as a csv.
+# This code is now commented out because following code simply takes the downloaded data from this project's directory.
 # conn <- dbConnect(MariaDB(),
 #                   user="bazia001",
 #                   password=key_get("latis-mysql","bazia001"),
@@ -24,3 +24,33 @@ library(RMariaDB)
 
 #This code reads in the data we downloaded previously from the LATIS mySQL
 week13_tbl <- read_csv("../data/week13.csv")
+
+
+# Analysis
+
+# Total number of managers
+n_managers <- nrow(week13_tbl)
+n_managers
+
+# Total number of unique managers by id
+n_managers_unique <- length(unique(week13_tbl$employee_id))
+n_managers_unique
+
+# Summary of managers by location, not hired as managers
+managers_by_location_not_hired <- week13_tbl %>% 
+  filter(manager_hire == "N") %>% 
+  group_by(city) %>%
+  count()
+managers_by_location_not_hired
+
+
+
+
+
+
+
+
+
+
+
+
