@@ -8,7 +8,7 @@ library(RMariaDB)
 
 # Data Import and Cleaning
 
-# The following code established a connection to the LATIS mySQL, gets the table of interest from the cla_tntlab database, and saves it as a csv.
+# The following code establishes a connection to the LATIS mySQL, gets the table of interest from the cla_tntlab database, and saves it as a csv.
 # This code is now commented out because following code simply takes the downloaded data from this project's directory.
 # conn <- dbConnect(MariaDB(),
 #                   user="bazia001",
