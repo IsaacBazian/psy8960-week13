@@ -55,6 +55,7 @@ dbGetQuery(conn, "SELECT performance_group, AVG(yrs_employed), STDDEV(yrs_employ
 # Note that by using DENSE_RANK, there are no gaps in sequential
 # ranks even if there are ties; the instructions were ambiguous as to whether
 # these gaps are desired or not, so I have erred on the side of including 
+# more information.
 dbGetQuery(conn, "WITH temp_ranked AS (
            SELECT *, DENSE_RANK() OVER(PARTITION BY city ORDER BY test_score DESC) AS manager_rank
            FROM datascience_8960_table)
