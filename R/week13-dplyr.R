@@ -53,8 +53,9 @@ tenure_tbl
 top_managers_tbl <- week13_tbl %>% 
   group_by(city) %>% 
   arrange(city, desc(test_score)) %>% 
-  select(employee_id, test_score, city) %>% 
-  slice_max(order_by = tibble(city, test_score), n = 3, with_ties = T)
+  mutate(rank = dense_rank(desc(test_score))) %>% 
+  filter(rank <= 3) %>% 
+  select(employee_id, test_score, city)
 top_managers_tbl
 
 
